@@ -1,0 +1,14 @@
+{
+  "name": "study-air-backend",
+  "version": "1.0.0",
+  "description": "Express server for the AI Agent project.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "firebase-admin": "^12.3.0"
+  }
+}
