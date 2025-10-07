@@ -8,6 +8,7 @@
     "dev": "node server.js"
   },
   "dependencies": {
+    "@dataconnect/generated": "file:src/dataconnect-generated",
     "express": "^4.19.2",
     "firebase-admin": "^12.3.0"
   }
