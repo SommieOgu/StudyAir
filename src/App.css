@@ -1,84 +1,174 @@
-
 html, body, #root {
-  margin: 0;
-  padding: 0;
   width: 100%;
-  height: 100%;
-  font-family: Arial, sans-serif;
+  margin: 0;
+  scroll-behavior: smooth;
 }
 
-/* Header bar */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 60px;  /* height of header */
+  padding-bottom: 60px; /* height of footer */
+  overflow-y: auto; /* allow scroll inside main content */
+}
+
+
 .top-header {
+  display: flex;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  z-index: 1100;
   height: 60px;
-  background-color: #17426e; 
+  width : 100%;
+  justify-content: space-between;
+  align-items: center;
+  background: black;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.description {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid white; 
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.4);
+  transition: all 0.3s ease;
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+  color: white;
+  width: 80%;
+  max-width: 900px;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #0e0f10, #303132);
+  background-color: black;
   color: white;
   display: flex;
-  align-items: center;
-  gap: 800px;
-  padding: 0 20px;
-  z-index: 1000;
+  flex-direction: column;
 }
 
-/* Header title */
-.top-header h1 {
-  margin: 0;
-  font-size: 24px;
-}
 
-/* Navigation buttons */
-.nav-buttons {
-  display: flex;
-  gap: 10px;
-}
 
 .nav-buttons a {
+  margin: 0 1rem;
   color: white;
   text-decoration: none;
-  padding: 5px 10px;
-  background-color: #357ABD; 
-  border-radius: 3px;
-  transition: background-color 0.2s;
+  font-weight: 500;
 }
 
 .nav-buttons a:hover {
-  background-color: #c8d5e7;
+  text-decoration: underline;
 }
 
-/* Push main content below header */
-main {
-  margin-top: 70px; 
-  padding: 20px;
-}
-
-/* Agent boxes row */
-.agent-row {
-  display: flex;
-  gap: 20px;
-  justify-content: center; /* center row horizontally */
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-/* Individual agent cards */
-.agent-card {
-  background-color: #357ABD;
-  color: white;
-  padding: 30px;
+.hero {
   text-align: center;
-  border-radius: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  text-decoration: none; /* remove underline */
-  flex: 1 1 150px;      
-  max-width: 200px;
-  transition: transform 0.2s, background-color 0.2s;
+  margin: 3rem 0;
+  color: white;
+}
+
+.agent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 3rem 2rem;
+  margin: 3rem auto; /* Adds vertical spacing */
+  max-width: 1000px;
+}
+
+
+.agent-card {
+  background: #1c1c1c;
+  border-radius: 1rem;
+  padding: 2rem;
+  color: white;
+  border: 2px solid #ff00cc;
+  background-clip: padding-box;
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.4); /* glowy effect */
+  transition: all 0.3s ease;
 }
 
 .agent-card:hover {
-  transform: translateY(-5px);
-  background-color: #ced5dd;
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(255, 0, 204, 0.6); 
 }
+
+.note-taker { border-top: 5px solid white; }
+.quiz-generator { border-top: 5px solid white; }
+.exam-prep { border-top: 5px solid white; }
+.study-room { border-top: 5px solid white; }
+
+.cta-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1rem;
+  box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.6);
+}
+.features {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: white;
+}
+
+.features h3 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+}
+
+.feature-card {
+  background: #1c1c1c;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255, 0, 204, 0.4);
+}
+
+.footer {
+  height: 60px;
+  width: 100%;
+  margin-top: auto;
+  bottom: 0;
+  position: fixed;
+  z-index: 1000;
+  text-align: center;       
+  line-height: 60px;        
+  background: black;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
