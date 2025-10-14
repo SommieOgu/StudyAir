@@ -48,8 +48,8 @@ function App() {
                     <p>Test your knowledge with AI-generated quizzes.</p>
                   </div>
                   <div className="feature-card">
-                    <h4>📅 Study Plans</h4>
-                    <p>Get custom study plans based on your goals and timelines.</p>
+                    <h4>📅 Plan Study Sessions</h4>
+                    <p> Study with peers to enhance retention.</p>
                   </div>
                 </div>
 
