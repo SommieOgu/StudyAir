@@ -1,10 +1,49 @@
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import './App.css';
 import NoteTaker from "./pages/NoteTaker";
 import QuizGenerator from "./pages/QuizGenerator";
 import ExamPrep from "./pages/ExamPrep";
 import StudyRoom from "./pages/StudyRoom";
+
+function AgentDropdown() {
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const agents = [
+    { name: "Note Taker", path: "/note-taker" },
+    { name: "Quiz Generator", path: "/quiz-generator" },
+    { name: "Exam Prep", path: "/exam-prep" },
+    { name: "Study Room", path: "/study-room" },
+  ];
+
+  const handleSelect = (path) => {
+    setOpen(false);
+    navigate(path);
+  };
+
+  return (
+    <div className="agent-dropdown">
+      <button className="agent-dropdown-btn" onClick={() => setOpen(!open)}>
+        AI Agents
+        <span className="arrow" />
+      </button>
+      {open && (
+        <ul className="agent-dropdown-menu">
+          {agents.map((agent) => (
+            <li
+              key={agent.path}
+              className="agent-dropdown-item"
+              onClick={() => handleSelect(agent.path)}
+            >
+              {agent.name}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -13,11 +52,15 @@ function App() {
         <h1 className="logo">StudyAir</h1>
         <nav className="nav-buttons">
           <Link to="/">Home</Link>  
-          <Link to="/note-taker">Note Taker</Link>
-          <Link to="/quiz-generator">Quiz Generator</Link>
-          <Link to="/exam-prep">Exam Prep</Link>
-          <Link to="/study-room">Study Room</Link>
+          <Link to="/">About</Link>
+          <Link to="/">Contact</Link>
+          <AgentDropdown />
         </nav>
+
+        <div className="auth-buttons">
+          <button className="login-btn">Login</button>
+          <button className="register-btn">Register</button>
+        </div>
       </header>
 
       <main className="main-content">
@@ -53,11 +96,9 @@ function App() {
                   </div>
                 </div>
 
-                {/* CTA Button */}
                 <a href="#agents" className="cta-button">Choose Your Agent</a>
               </div>
 
-              {/* Agent Section */}
               <div id="agents" className="agent-grid">
                 <Link className="agent-card note-taker" to="/note-taker">
                   <h3>📝 Note Taker</h3>
@@ -75,6 +116,24 @@ function App() {
                   <h3>🗣️ Study Room</h3>
                   <p>Collaborate and learn with others.</p>
                 </Link>
+              </div>
+
+              <div className="testimonials">
+                <h3>What Students Are Saying</h3>
+                <div className="testimonial-grid">
+                  <div className="testimonial-card">
+                    <p>“StudyAir turned my messy notes into study gold. Can’t study without it now!”</p>
+                    <h4>— Sarah, Psychology Major</h4>
+                  </div>
+                  <div className="testimonial-card">
+                    <p>“I passed my finals thanks to the Quiz Generator. It’s scary good.”</p>
+                    <h4>— Jamal, Engineering Student</h4>
+                  </div>
+                  <div className="testimonial-card">
+                    <p>“The Study Room feature is amazing — it's like having a virtual study group.”</p>
+                    <h4>— Priya, Business Admin</h4>
+                  </div>
+                </div>
               </div>
             </section>
           } />
