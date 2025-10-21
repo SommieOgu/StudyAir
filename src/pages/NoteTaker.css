@@ -1,0 +1,77 @@
+.note-taker-page {
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.file-input {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.transcribe-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1rem;
+  box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
+  transition: all 0.3s ease;
+  animation: pulse 2.5s infinite;
+}
+
+
+.transcribe-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.transcribe-result {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+
+.loading-overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.6); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  gap: 1rem;
+}
+
+/* spinner */
+.loader {
+  border: 8px solid #f3f3f3; /* Light gray */
+  border-top: 8px solid #ff69b4; /* Pink */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+/* Spin animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+
