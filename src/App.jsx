@@ -123,15 +123,15 @@ function App() {
                 <div className="testimonial-grid">
                   <div className="testimonial-card">
                     <p>“StudyAir turned my messy notes into study gold. Can’t study without it now!”</p>
-                    <h4>— Sarah, Psychology Major</h4>
+                    <h4>— Anna, Psychology Major</h4>
                   </div>
                   <div className="testimonial-card">
                     <p>“I passed my finals thanks to the Quiz Generator. It’s scary good.”</p>
-                    <h4>— Jamal, Engineering Student</h4>
+                    <h4>— Sam, Engineering Student</h4>
                   </div>
                   <div className="testimonial-card">
                     <p>“The Study Room feature is amazing — it's like having a virtual study group.”</p>
-                    <h4>— Priya, Business Admin</h4>
+                    <h4>— Devin, Business Admin</h4>
                   </div>
                 </div>
               </div>
