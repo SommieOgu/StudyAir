@@ -62,21 +62,34 @@ function App() {
           <button className="register-btn">Register</button>
         </div>
       </header>
-
       <main className="main-content">
         <Routes>
           <Route path="/" element={
             <section className="home">
               <div className="hero">
-                <h2>Welcome to StudyAir</h2>
-                <p>Your AI-powered academic assistant.</p>
+               <div class="hero-content">
+                    <h2> Welcome to StudyAir</h2>
+                    <p> Your AI-powered academic assistant</p>
+               </div>
+                <div className="message msg1"> Ready to be a pro?</div> 
+                <div className="message msg2"> Generating your quiz...</div>
+                <div className="message msg3"> Review every day!</div>
+                <div className="message msg4"> Study with friends!</div>
+                <div className="message msg5"> Yay I passed my exam!</div>
+                <div className="message msg6"> AI-powered study tools!</div>
+                <div className="message msg7"> Time to focus</div>
+                <div className="message msg8"> You got this!</div>
+
               </div>
 
               <div className="description">
                 <h2>
-                  Our purpose is to make learning easier and more efficient for students by leveraging the power of AI. 
-                  We believe that with the right tools, anyone can achieve academic success. Dive in and explore our AI-powered agents designed to enhance your study experience.
+                  Our purpose: Making learning smarter, faster, and easier with AI-powered tools
                 </h2>
+              </div>
+
+              <div className="mission">
+                <h2>Mission: We provide AI study assistants that help students practice, organize, and master their coursework effortlessly</h2>
               </div>
 
               <div className="features">
