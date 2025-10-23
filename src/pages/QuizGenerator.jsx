@@ -5,7 +5,7 @@ export default function QuizGenerator() {
   const [name, setName] = useState("");
   const [className, setClassName] = useState("");
   const [topic, setTopic] = useState("");
-  const [subtopic, setSubtopic] = useState("");
+  const [file, setFile] = useState(null);
   const [questions, setQuestions] = useState("");
   const [questionType, setQuestionType] = useState("multiple-choice");
   const [difficulty, setDifficulty] = useState("easy");
@@ -14,105 +14,110 @@ export default function QuizGenerator() {
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
-    switch (name) {
-      case "name":
-        setName(value);
-        break;
-      case "className":
-        setClassName(value);
-        break;
-      case "topic":
-        setTopic(value);
-        break;
-      case "subtopic":
-        setSubtopic(value);
-        break;
-      case "questions":
-        setQuestions(value);
-        break;
-      case "questionType":
-        setQuestionType(value);
-        break;
-      case "difficulty":
-        setDifficulty(value);
-        break;
-      case "shuffle":
-        setShuffle(checked);
-        break;
-      case "timeLimit":
-        setTimeLimit(value);
-        break;
-      default:
-        break;
-    }
+    if (name === "name") setName(value);
+    else if (name === "className") setClassName(value);
+    else if (name === "topic") setTopic(value);
+    else if (name === "questions") setQuestions(value);
+    else if (name === "questionType") setQuestionType(value);
+    else if (name === "difficulty") setDifficulty(value);
+    else if (name === "shuffle") setShuffle(checked);
+    else if (name === "timeLimit") setTimeLimit(value);
+  }
+
+  function handleFileChange(e) {
+    setFile(e.target.files[0]);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log("Name:", name);
+    console.log("Class:", className);
+    console.log("Topic:", topic);
+    if (file) console.log("Uploaded file:", file.name);
+    console.log("Number of questions:", questions);
+    console.log("Question type:", questionType);
+    console.log("Difficulty:", difficulty);
+    console.log("Shuffle:", shuffle);
+    console.log("Time limit:", timeLimit);
 
-    console.log({
-      name,
-      className,
-      topic,
-      subtopic,
-      questions,
-      questionType,
-      difficulty,
-      shuffle,
-      timeLimit,
-    });
-    alert("Quiz Generated! Check console for submitted data.");
   }
 
   return (
-    <div className="quiz-box">
-  <h2>Quiz Generator</h2>
-  <div className="quiz-column">
-    <label>
-      Name:
-      <input type="text" name="name" value={name} onChange={handleChange} />
-    </label>
-    <label>
-      Class:
-      <input type="text" name="className" value={className} onChange={handleChange} />
-    </label>
-    <label>
-      Topic:
-      <input type="text" name="topic" value={topic} onChange={handleChange} />
-    </label>
-  </div>
+    <div className="quiz-page">
+      <h2>Quiz Generator</h2>
+      <form className="quiz-box" onSubmit={handleSubmit}>
+        <div className="quiz-columns">
+          <div className="quiz-column">
+            <label>
+              Name:
+              <input type="text" name="name" value={name} onChange={handleChange} />
+            </label>
+            <label>
+              Class:
+              <input type="text" name="className" value={className} onChange={handleChange} />
+            </label>
+            <label>
+              Topic (optional):
+              <input type="text" name="topic" value={topic} onChange={handleChange} />
+            </label>
+            <label>
+              Upload notes or slides (optional):
+              <input
+                type="file"
+                accept=".pdf,.docx,.pptx,.txt"
+                onChange={handleFileChange}
+              />
+            </label>
+            {file && <p>Selected file: {file.name}</p>}
+          </div>
 
-  <div className="quiz-column">
-    <label>
-      Number of Questions:
-      <input type="number" name="questions" value={questions} onChange={handleChange} />
-    </label>
-    <label>
-      Question Type:
-      <select name="questionType" value={questionType} onChange={handleChange}>
-        <option value="multiple-choice">Multiple Choice</option>
-        <option value="true-false">True / False</option>
-        <option value="short-answer">Short Answer</option>
-      </select>
-    </label>
-    <label>
-      Difficulty:
-      <select name="difficulty" value={difficulty} onChange={handleChange}>
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-      </select>
-    </label>
-    <label>
-      Shuffle:
-      <input type="checkbox" name="shuffle" checked={shuffle} onChange={handleChange} />
-    </label>
-    <label>
-      Time Limit:
-      <input type="number" name="timeLimit" value={timeLimit} onChange={handleChange} />
-    </label>
-    <button type="submit">Generate Quiz</button>
-  </div>
-</div>
+
+          <div className="quiz-column">
+            <label>
+              Number of Questions:
+              <input type="number" name="questions" value={questions} onChange={handleChange} />
+            </label>
+            <label>
+              Question Type:
+              <select name="questionType" value={questionType} onChange={handleChange}>
+                <option value="multiple-choice">Multiple Choice</option>
+                <option value="true-false">True / False</option>
+                <option value="short-answer">Short Answer</option>
+              </select>
+            </label>
+            <label>
+              Difficulty:
+              <select name="difficulty" value={difficulty} onChange={handleChange}>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </label>
+            <label>
+              Shuffle Questions:
+              <input type="checkbox" name="shuffle" checked={shuffle} onChange={handleChange} />
+            </label>
+          </div>
+        </div>
+
+
+        <div className="quiz-row">
+          <div className="quiz-column">
+            <label>
+              Time Limit (minutes):
+              <input
+                type="number"
+                name="timeLimit"
+                value={timeLimit}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+          <div className="quiz-column" style={{ display: "flex", justifyContent: "flex-end" }}>
+            <button type="submit">Generate Quiz</button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 }
