@@ -5,6 +5,9 @@ import NoteTaker from "./pages/NoteTaker";
 import QuizGenerator from "./pages/QuizGenerator";
 import ExamPrep from "./pages/ExamPrep";
 import StudyRoom from "./pages/StudyRoom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { useAuth } from "./contexts/AuthContext";
 
 function AgentDropdown() {
   const [open, setOpen] = useState(false);
@@ -46,6 +49,18 @@ function AgentDropdown() {
 }
 
 function App() {
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch {
+      alert("Failed to log out");
+    }
+  };
+
   return (
     <div className="app">
       <header className="top-header">
@@ -58,8 +73,17 @@ function App() {
         </nav>
 
         <div className="auth-buttons">
-          <button className="login-btn">Login</button>
-          <button className="register-btn">Register</button>
+          {currentUser ? (
+            <>
+              <span style={{ marginRight: '10px', color: 'white' }}>{currentUser.email}</span>
+              <button className="login-btn" onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <>
+              <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
+              <button className="register-btn" onClick={() => navigate("/register")}>Register</button>
+            </>
+          )}
         </div>
       </header>
       <main className="main-content">
@@ -150,6 +174,8 @@ function App() {
               </div>
             </section>
           } />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/note-taker" element={<NoteTaker />} />
           <Route path="/quiz-generator" element={<QuizGenerator />} />
           <Route path="/exam-prep" element={<ExamPrep />} />
