@@ -158,8 +158,22 @@ function App() {
       </main>
 
       <footer className="footer">
-        <p>© 2025 StudyAir • Built for students, powered by AI</p>
-      </footer>
+  <div className="footer-container">
+    <div className="footer-section">
+      <p>© 2025 StudyAir</p>
+      <p>Built for students, powered by AI</p>
+    </div>
+    <div className="footer-section">
+      <p>Contact Us:</p>
+      <p>Email: studyair@gmail.com</p>
+      <p>Phone: +1 (443)-900-4558</p>
+    </div>
+    <div className="footer-section">
+      <p>Follow Us: @studyair</p>
+      <p>Twitter | Facebook | Instagram</p>
+    </div>
+  </div>
+</footer>
     </div>
   );
 }
