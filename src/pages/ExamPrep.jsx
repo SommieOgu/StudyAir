@@ -3,8 +3,8 @@ import "./ExamPrep.css";
 // asked chat for help to create the flashcard system
 function ExamPrep() {
   const [flashcards, setFlashcards] = useState([]); // Array of flashcards
-  const [questionInput, setQuestionInput] = useState(""); // Manual question input
-  const [answerInput, setAnswerInput] = useState(""); // Optional answer input
+  const [questionInput, setQuestionInput] = useState(""); 
+  const [answerInput, setAnswerInput] = useState(""); 
   const [currentIndex, setCurrentIndex] = useState(0); // Index of the current flashcard
   const [showAnswer, setShowAnswer] = useState(false); // Toggle between question and answer
 

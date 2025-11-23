@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
 import './App.css';
 import NoteTaker from "./pages/NoteTaker";
 import QuizGenerator from "./pages/QuizGenerator";
@@ -46,14 +46,39 @@ function AgentDropdown() {
 }
 
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToSection = (id) => {
+    if (location.pathname !== "/") {
+      navigate("/", { replace: false });
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+    } else {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="app">
       <header className="top-header">
         <h1 className="logo">StudyAir</h1>
         <nav className="nav-buttons">
-          <Link to="/">Home</Link>  
-          <Link to="/">About</Link>
-          <Link to="/">Contact</Link>
+          <Link
+            to="/"
+            onClick={(e) => { e.preventDefault(); scrollToSection("home-hero"); }}
+          >
+            Home
+          </Link>
+          <Link
+            to="/"
+            onClick={(e) => { e.preventDefault(); scrollToSection("our-purpose"); }}
+          >
+            About
+          </Link>
           <AgentDropdown />
         </nav>
         <div className="auth-buttons">
@@ -68,12 +93,12 @@ function App() {
             path="/"
             element={
               <section className="home">
-                <div className="hero">
+                <div id="home-hero" className="hero">
                   <div className="hero-content">
                     <h2>Welcome to StudyAir</h2>
                     <p>Your AI-powered academic assistant</p>
                   </div>
-                  <div className="message msg1">Ready to be a pro?</div> 
+                  <div className="message msg1">Ready to be a pro?</div>
                   <div className="message msg2">Generating your quiz...</div>
                   <div className="message msg3">Review every day!</div>
                   <div className="message msg4">Study with friends!</div>
@@ -83,13 +108,13 @@ function App() {
                   <div className="message msg8">You got this!</div>
                 </div>
 
-                <div className="description">
+                <div id="our-purpose" className="description">
                   <h2>
                     Our purpose: Making learning smarter, faster, and easier with AI-powered tools
                   </h2>
                 </div>
 
-                <div className="mission">
+                <div id="mission" className="mission">
                   <h2>
                     Mission: We provide AI study assistants that help students practice, organize, and master their coursework effortlessly
                   </h2>
@@ -111,7 +136,6 @@ function App() {
                       <p>Study with peers to enhance retention.</p>
                     </div>
                   </div>
-
                   <a href="#agents" className="cta-button">Choose Your Agent</a>
                 </div>
 
