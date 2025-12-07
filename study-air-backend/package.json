@@ -7,13 +7,13 @@
     "start": "node server.js",
     "dev": "node server.js"
   },
-  
   "dependencies": {
     "@dataconnect/generated": "file:src/dataconnect-generated",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^4.22.1",
     "firebase-admin": "^12.7.0",
+    "groq-sdk": "^0.37.0",
     "multer": "^2.0.2",
     "openai": "^6.10.0"
   }

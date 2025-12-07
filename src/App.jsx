@@ -6,14 +6,13 @@ import "./App.css";
 
 import NoteTaker from "./pages/NoteTaker";
 import QuizGenerator from "./pages/QuizGenerator";
-import ExamPrep from "./pages/ExamPrep";
 import StudyRoom from "./pages/StudyRoom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Settings from "./pages/Settings";
 import { useAuth } from "./contexts/AuthContext";
 
-// ---------- Settings popup (GitHub style) ----------
+
 const SettingsPopup = ({ theme, onThemeChange , onClose }) => {
   const isDark = theme === "dark";
   
@@ -57,7 +56,6 @@ function AgentDropdown() {
   const agents = [
     { name: "Note Taker", path: "/note-taker" },
     { name: "Quiz Generator", path: "/quiz-generator" },
-    { name: "Exam Prep", path: "/exam-prep" },
     { name: "Study Room", path: "/study-room" },
   ];
 
@@ -188,7 +186,7 @@ function App() {
                 <div className="message msg2"> Generating your quiz...</div>
                 <div className="message msg3"> Review every day!</div>
                 <div className="message msg4"> Study with friends!</div>
-                <div className="message msg5"> Yay I passed my exam!</div>
+                <div className="message msg5"> Yay I passed my quiz!</div>
                 <div className="message msg6"> AI-powered study tools!</div>
                 <div className="message msg7"> Time to focus</div>
                 <div className="message msg8"> You got this!</div>
@@ -234,10 +232,6 @@ function App() {
                   <h3>📃 Quiz Generator</h3>
                   <p>Generate quizzes from your study material.</p>
                 </Link>
-                <Link className="agent-card exam-prep" to="/exam-prep">
-                  <h3>📚 Exam Prep</h3>
-                  <p>Personalized study plans and flashcards.</p>
-                </Link>
                 <Link className="agent-card study-room" to="/study-room">
                   <h3>🗣️ Study Room</h3>
                   <p>Collaborate and learn with others.</p>
@@ -267,7 +261,6 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/note-taker" element={<NoteTaker />} />
           <Route path="/quiz-generator" element={<QuizGenerator />} />
-          <Route path="/exam-prep" element={<ExamPrep />} />
           <Route path="/study-room" element={<StudyRoom />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
