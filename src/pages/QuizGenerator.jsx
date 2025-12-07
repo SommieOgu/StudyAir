@@ -121,7 +121,7 @@ export default function QuizGenerator() {
       setShowResults(false);
 
     } catch (err) {
-      console.error("❌ Quiz generation error:", err);
+      console.error("Quiz generation error:", err);
       alert("Error generating quiz.");
     }
   }
@@ -184,7 +184,7 @@ export default function QuizGenerator() {
         </div>
       </form>
 
-      {/* ⭐ INTERACTIVE QUIZ */}
+      {/* INTERACTIVE QUIZ */}
       {parsedQuiz.length > 0 ? (
         <div className="quiz-result">
           <h2>{name}'s Quiz - {className}</h2>
@@ -235,7 +235,7 @@ export default function QuizGenerator() {
           )}
         </div>
       ) : quizOutput ? (
-        // ⭐ FALLBACK: Show raw text if parsing failed
+        // FALLBACK: Show raw text if parsing failed
         <div className="quiz-result">
           <h2>Generated Quiz</h2>
           <pre className="quiz-text">{quizOutput}</pre>

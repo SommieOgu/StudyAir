@@ -1,0 +1,157 @@
+.study-room-container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 2rem 3rem;
+  background: #1c1c1c;
+  color: white;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.3);
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+
+.study-room-header {
+  position: relative;
+  display: flex;
+  justify-content: center;   /* centers the h2 */
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #333;
+}
+
+
+/* Title */
+.study-room-container h2 {
+
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Video section */
+.videos {
+  display: flex;
+  gap: 60px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  width: 100%;
+
+}
+
+.video-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  
+}
+
+.video-block h3 {
+  text-align: center;
+  margin: 0;
+}
+
+ .hangup-btn-round {
+  width: 60px;
+  height: 60px;
+  background-color: #e84545;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.hangup-btn-round:hover {
+  background-color: #e80606;
+  transform: translateY(-3px);
+}
+
+/* Sidebar container */
+.sidebar {
+  position: fixed;          /* important: take it out of normal flow */
+  top: 0;
+  left: -260px;             /* hidden by default */
+  width: 260px;
+  height: 100%;
+  background: #1f1f1f;
+  color: white;
+  padding: 0px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.4);
+  transition: left 0.3s ease;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+/* Menu button pinned to the left, doesn't push title */
+.sidebar-toggle {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+/* =====================================
+   Light Theme Overrides for Study Room
+   ===================================== */
+
+body.light-mode .study-room-container {
+  background: #ffffffdf;
+  color: #0f172a;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); /* blue glow */
+}
+
+body.light-mode .sidebar-toggle {
+background: linear-gradient( #3b82f6, #6366f1);
+
+}
+
+body.light-mode .webcam {
+background: linear-gradient( #3b82f6, #6366f1);
+
+}
+
+body.light-mode .sidebar {
+background: linear-gradient( #cbdcf8, #a3c4e7);
+
+}
+body.light-mode .createCall {
+background: white;
+color: #0f172a;
+}
+
+body.light-mode .callID {
+background-color: #f0f8ff; /* Alice Blue */
+  
+  /* Change the color of the border */
+  border: 2px solid #b1cfee; /* Blue border */
+  
+  /* Change the color of the text the user types */
+  color: #333; 
+  
+  /* Optional: Make it look nicer */
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+body.light-mode .callID:focus {
+  border-color: #286ea7; /* Green border when active */
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+  outline: none; /* Remove default outline */
+}

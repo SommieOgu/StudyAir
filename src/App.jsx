@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+// src/App.jsx
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import './App.css';
+import { FaCog, FaTimes } from "react-icons/fa";
+import "./App.css";
+
 import NoteTaker from "./pages/NoteTaker";
 import QuizGenerator from "./pages/QuizGenerator";
 import ExamPrep from "./pages/ExamPrep";
@@ -10,6 +13,43 @@ import Register from "./pages/Register";
 import Settings from "./pages/Settings";
 import { useAuth } from "./contexts/AuthContext";
 
+// ---------- Settings popup (GitHub style) ----------
+const SettingsPopup = ({ theme, onThemeChange , onClose }) => {
+  const isDark = theme === "dark";
+  
+  return (
+    <div className="settings-overlay" onClick={onClose}>
+      <div className="settings-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="settings-header">
+          <h3>Appearance</h3>
+          <button className="icon-btn" onClick={onClose} aria-label="Close">
+            <FaTimes />
+          </button>
+        </div>
+
+        <div className="settings-section">
+          <p className="settings-section-title">Theme</p>
+          <div className="theme-options">
+            <button
+              className={`theme-pill ${theme === "dark" ? "selected" : ""}`}
+              onClick={() => onThemeChange("light")}
+            >
+              Light
+            </button>
+            <button
+              className={`theme-pill ${theme === "light" ? "selected" : ""}`}
+              onClick={() => onThemeChange("dark")}
+            >
+              Dark
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ---------- Agent dropdown (as you had before) ----------
 function AgentDropdown() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -50,6 +90,38 @@ function AgentDropdown() {
 }
 
 function App() {
+  // default = dark, but remember last choice
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "dark"
+  );
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  
+
+  // Apply theme to <body> and persist to localStorage
+  useEffect(() => {
+    const body = document.body;
+    // base CSS = dark; we only add/remove .light-mode
+    body.classList.toggle("light-mode", theme === "light");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  
+  // theme changer (used by popup)
+  const toggleTheme = (mode) => {
+    if (mode) {
+      setTheme(mode);
+    } else {
+      setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    }
+  };
+
+  const openSettings = () => setIsSettingsOpen(true);
+  const closeSettings = () => setIsSettingsOpen(false);
+
+  const handleThemeChange = (value) => {
+    setTheme(value);
+  };
+
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -100,14 +172,17 @@ function App() {
               <button className="register-btn" onClick={() => navigate("/register")}>Register</button>
             </>
           )}
-        </div>
-      </header>
+          <button className="user-settings-btn" onClick={openSettings} aria-label="Appearance settings"title="Appearance settings">
+      <FaCog />
+    </button>
+  </div>
+</header>
       <main className="main-content">
         <Routes>
           <Route path="/" element={
-            <section className="home">
+            <section className="hsome">
               <div className="hero">
-               <div class="hero-content">
+               <div className="hero-content">
                     <h2> Welcome to StudyAir</h2>
                     <p> Your AI-powered academic assistant</p>
                </div>
@@ -217,6 +292,14 @@ function App() {
     </div>
   </div>
 </footer>
+      {/* Settings popup */}
+      {isSettingsOpen && (
+        <SettingsPopup
+          theme={theme}
+          onThemeChange={handleThemeChange}
+          onClose={closeSettings}
+        />
+      )}
     </div>
   );
 }
