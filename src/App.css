@@ -548,29 +548,30 @@ body {
   font-weight: 500;
   font-size: 14px;
 }
-/* ================================
+/* ================================ */
    GitHub-style settings popup
 .settings-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 9999;
 }
 
 .settings-popup {
-  width: 380px;
-  max-width: 90%;
-  background: #161b22;              /* GitHub dark card */
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 280px; 
+  z-index: 10000;
+  background: #161b22; /* GitHub dark card */
   border-radius: 12px;
   border: 1px solid #30363d;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
-  padding: 16px 20px 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  padding: 16px;
   color: #e6edf3;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
+  pointer-events: auto;
 }
 
 /* Light version of the popup */
@@ -584,7 +585,7 @@ body.light-mode .settings-popup {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 .settings-header h3 {
@@ -610,7 +611,8 @@ body.light-mode .settings-popup {
 
 .settings-section {
   margin-top: 10px;
-  padding-top: 10px;
+  padding: 16px 0;
+  padding-top: 15px;
   border-top: 1px solid rgba(148, 163, 184, 0.35);
 }
 
@@ -619,18 +621,21 @@ body.light-mode .settings-popup {
   text-transform: uppercase;
   letter-spacing: 0.09em;
   color: #9ca3af;
-  margin: 0 0 8px;
+  margin: 0 0 12px;
+  display: block;
 }
 
 .theme-options {
+  margin-top: 15px;
   display: flex;
-  gap: 8px;
+  gap: 15px;
+  width: 100%;
 }
 
 .theme-pill {
   flex: 1;
-  padding: 8px 10px;
-  border-radius: 999px;
+  padding: 10px 12px;
+  border-radius: 6px;
   border: 1px solid #30363d;
   background: #0d1117;
   color: #e6edf3;
@@ -659,7 +664,7 @@ body.light-mode .theme-pill.selected {
 
 /* ================================
    Light theme overrides
-   (body.light-mode is added by App.jsx)
+   (body.light-mode is added by App.jsx)*/
 
 body.light-mode {
   background: linear-gradient(135deg, #e0f2ff, #f5f7fb);
@@ -848,4 +853,12 @@ body.light-mode .agent-dropdown-item {
 
 body.light-mode .agent-dropdown-item:hover {
   background-color: #87d0f1;
+}
+
+body.light-mode .navbar-username {
+  color: #000000 !important;
+}
+
+body.light-mode .top-header .user-profile-nav span {
+  color: #000000;
 }
