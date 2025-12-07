@@ -91,9 +91,7 @@ function AgentDropdown() {
 
 function App() {
   // default = dark, but remember last choice
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "dark"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   
 
@@ -163,7 +161,7 @@ function App() {
                 onClick={() => navigate("/settings")}
                 style={{ background: 'linear-gradient(to right, #3333ff, #ff00cc)' }}
               >
-                Settings
+                Account
               </button>
             </>
           ) : (
