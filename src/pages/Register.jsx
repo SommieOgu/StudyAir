@@ -16,14 +16,24 @@ function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const uname = username.trim();
-    const usernameOk = /^[a-zA-Z0-9_]{3,20}$/.test(uname);
-    if (!usernameOk) {
-      return setError("Username must be 3-20 chars: letters, numbers, or underscore");
-    }
+  const uname = username.trim();
+  if (!uname) {
+  return setError("Username cannot be empty");
+  }
 
-    if (password !== confirmPassword) {
-      return setError("Passwords do not match");
+  if (uname.length < 3 || uname.length > 20) {
+  return setError("Username must be between 3 and 20 characters");
+  }
+
+  for (let i = 0; i < uname.length; i++) {
+    const char = uname[i];
+    const isLetter = (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z');
+    const isNumber = char >= '0' && char <= '9';
+    const isUnderscore = char === '_';
+
+    if (!isLetter && !isNumber && !isUnderscore) {
+    return setError("Username can only contain letters, numbers, or underscores");
+      }
     }
 
     try {

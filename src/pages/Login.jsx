@@ -7,8 +7,9 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, resetPassword } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -16,6 +17,7 @@ function Login() {
 
     try {
       setError("");
+      setMessage("");
       setLoading(true);
       await login(email, password);
       navigate("/");
@@ -23,6 +25,22 @@ function Login() {
       setError("Failed to log in: " + error.message);
     }
 
+    setLoading(false);
+  }
+
+  async function handleForgotPassword() {
+    if (!email) {
+      return setError("Please enter your email address first.");
+    }
+    try {
+      setMessage("");
+      setError("");
+      setLoading(true);
+      await resetPassword(email);
+      setMessage("Check your inbox for further instructions.");
+    } catch (error) {
+      setError("Failed to reset password: " + error.message);
+    }
     setLoading(false);
   }
 
@@ -56,11 +74,22 @@ function Login() {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
-        <div className="auth-footer">
-          Need an account? <Link to="/register">Register</Link>
-        </div>
-      </div>
+
+    <div className="auth-footer">
+      <button 
+        onClick={handleForgotPassword} 
+        disabled={loading}
+        style={{ background: 'none', border: 'none', color: '#ff00cc', cursor: 'pointer', fontWeight: '600' }}
+      >
+        Forgot Password?
+        </button>
     </div>
+
+    <div className="auth-footer">
+      Need an account? <Link to="/register">Register</Link>
+    </div>
+  </div>
+</div>
   );
 }
 

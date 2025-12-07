@@ -4,9 +4,11 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile
+  updateProfile,
+  updatePassword,
+  sendPasswordResetEmail
 } from "firebase/auth";
-import { doc, runTransaction, serverTimestamp } from "firebase/firestore";
+import { doc, runTransaction, serverTimestamp, getDoc, deleteDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 
 const AuthContext = createContext();
@@ -25,7 +27,6 @@ export function AuthProvider({ children }) {
     const uname = username.trim();
     const usernameKey = uname.toLowerCase();
 
-    // Ensure unique username and save user profile in a single transaction
     await runTransaction(db, async (tx) => {
       const usernameRef = doc(db, "usernames", usernameKey);
       const usernameSnap = await tx.get(usernameRef);
@@ -42,7 +43,6 @@ export function AuthProvider({ children }) {
       );
     });
 
-    // Also set Firebase Auth displayName for convenience
     await updateProfile(user, { displayName: uname });
 
     return userCredential;
@@ -55,6 +55,47 @@ export function AuthProvider({ children }) {
   function logout() {
     return signOut(auth);
   }
+
+  async function updateUserProfile(user, newUsername) {
+    const uname = newUsername.trim();
+    const usernameKey = uname.toLowerCase();
+    const oldUsernameKey = (user.displayName || "").toLowerCase(); 
+
+    if (usernameKey === oldUsernameKey) {
+        if (user.displayName === null) {
+            await updateProfile(user, { displayName: uname });
+            return;
+        }
+        return; 
+    }
+    
+    await runTransaction(db, async (tx) => {
+      const usernameRef = doc(db, "usernames", usernameKey);
+      const usernameSnap = await tx.get(usernameRef);
+      if (usernameSnap.exists() && usernameSnap.data().uid !== user.uid) {
+        throw new Error("Username is already taken by another user");
+      }
+
+      if (oldUsernameKey) {
+        const oldUsernameRef = doc(db, "usernames", oldUsernameKey);
+        tx.delete(oldUsernameRef);
+      }
+      
+      const userRef = doc(db, "users", user.uid);
+      tx.set(usernameRef, { uid: user.uid, username: uname, createdAt: serverTimestamp() });
+      tx.update(userRef, { username: uname, usernameLowercase: usernameKey });
+    });
+
+    await updateProfile(user, { displayName: uname });
+  }
+
+  function updateUserPassword(newPassword) {
+    return updatePassword(auth.currentUser, newPassword);
+  }
+
+  function resetPassword(email) {
+  return sendPasswordResetEmail(auth, email);
+}
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -69,7 +110,10 @@ export function AuthProvider({ children }) {
     currentUser,
     signup,
     login,
-    logout
+    logout,
+    updateUserProfile, 
+    updateUserPassword,
+    resetPassword
   };
 
   return (

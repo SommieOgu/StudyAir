@@ -7,6 +7,7 @@ import ExamPrep from "./pages/ExamPrep";
 import StudyRoom from "./pages/StudyRoom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Settings from "./pages/Settings";
 import { useAuth } from "./contexts/AuthContext";
 
 function AgentDropdown() {
@@ -51,7 +52,6 @@ function AgentDropdown() {
 function App() {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
-
   const handleLogout = async () => {
     try {
       await logout();
@@ -75,8 +75,24 @@ function App() {
         <div className="auth-buttons">
           {currentUser ? (
             <>
-              <span style={{ marginRight: '10px', color: 'white' }}>{currentUser.displayName || currentUser.email}</span>
-              <button className="login-btn" onClick={handleLogout}>Logout</button>
+              <div className="user-profile-nav">
+                <img 
+                  src={currentUser.photoURL || "https://ui-avatars.com/api/?name=" + (currentUser.displayName || currentUser.email)} 
+                  alt="User Icon" 
+                  className="navbar-user-icon" 
+              />
+              <span className="navbar-username">
+                {currentUser.displayName || currentUser.email}
+              </span>
+              </div>
+              
+              <button 
+                className="login-btn" 
+                onClick={() => navigate("/settings")}
+                style={{ background: 'linear-gradient(to right, #3333ff, #ff00cc)' }}
+              >
+                Settings
+              </button>
             </>
           ) : (
             <>
@@ -180,6 +196,7 @@ function App() {
           <Route path="/quiz-generator" element={<QuizGenerator />} />
           <Route path="/exam-prep" element={<ExamPrep />} />
           <Route path="/study-room" element={<StudyRoom />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </main>
 
@@ -205,4 +222,3 @@ function App() {
 }
 
 export default App;
-
