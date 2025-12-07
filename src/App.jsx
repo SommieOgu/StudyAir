@@ -75,7 +75,7 @@ function App() {
         <div className="auth-buttons">
           {currentUser ? (
             <>
-              <span style={{ marginRight: '10px', color: 'white' }}>{currentUser.email}</span>
+              <span style={{ marginRight: '10px', color: 'white' }}>{currentUser.displayName || currentUser.email}</span>
               <button className="login-btn" onClick={handleLogout}>Logout</button>
             </>
           ) : (

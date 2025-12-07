@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 
 function Register() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -15,6 +16,12 @@ function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    const uname = username.trim();
+    const usernameOk = /^[a-zA-Z0-9_]{3,20}$/.test(uname);
+    if (!usernameOk) {
+      return setError("Username must be 3-20 chars: letters, numbers, or underscore");
+    }
+
     if (password !== confirmPassword) {
       return setError("Passwords do not match");
     }
@@ -22,7 +29,7 @@ function Register() {
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
+      await signup(email, password, uname);
       navigate("/");
     } catch (error) {
       setError("Failed to create an account: " + error.message);
@@ -37,6 +44,17 @@ function Register() {
         <h2>Register for StudyAir</h2>
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="e.g. study_fan123"
+              required
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
