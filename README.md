@@ -25,9 +25,17 @@ StudyAir is a React.js web app featuring AI-powered study tools including Note T
 Frontend:
 
 - Home page with hero section and floating messages
-- Navigation bar with Home, About, and AI Agents dropdown
+- Navigation bar with Home, About, AI Agents dropdown, Account Management, and Setting Display Themes
 - Individual pages for each AI Agent
 - Responsive design with hover animations
+- Interactive settings page allowing user to easily change thier account details
+
+Backend:
+
+- User Authentication: Secure Sign up, Login, and password reset functionality using firebase
+- Ensures username uniqueness by linking firebase usernames and users collections
+- Provides real time user tracking using Firebase's AuthStateChanged.
+- The backend incorporates Firebase Authentication (manages accounts), Cloud Firestore (NoSQL databse used to store user profiles and details), and Firebase Storage (used for retriving user profile icons, as of right now it's tied to a simple API that generates initials from names: https://ui-avatars.com/) for its full integraition. 
 
 ## Dependencies
 
@@ -35,7 +43,13 @@ These packages are required for the frontend:
 
 - **react** – Core library for building UI  
 - **react-dom** – Rendering React components in the DOM  
-- **react-router-dom** – Routing between pages/components  
+- **react-router-dom** – Routing between pages/components
+
+These packages are required for the Backend:
+
+- **firebase** – Integration for Auth, Firestore, and Storage  
+- **concurrently** – Runs the client and server development processes simultaneously  
+- **vite** – Build tool and development server
 
 You can install them with:
 
@@ -49,9 +63,12 @@ npm install
 git clone https://github.com/your-username/studyair.git
 
 2. In the terminal "cd studyair"
-3. In the terminal, Start development server with "npm run dev"
-
-
+3. Configure Firebase, make sure your firebase.js is configured with your specific APIKey and projectID
+3. To download firebase, you can run this command to install the latest SDK: 
+    npm install firebase
+4. To download concurrently, you can run this command to install it, this allows you to run your frontend and backend server at the same time with one command:
+    npm install concurrently vite --save-dev
+6. In the terminal, Start development server with "npm run dev"
 
 
 Study website with AI integration for the future of studying
