@@ -476,7 +476,7 @@ body {
   opacity: 0;
   animation: floatMsg 10s ease-in-out infinite;
   transition: all 0.5s ease;
-  z-index: 5;                 /* lower than heading so heading stays on top */
+  z-index: 5; /* lower than heading so heading stays on top */
 }
 .msg1 { top: 10%; left: 8%; animation-delay: 0s; }
 .msg2 { top: 15%; right: 12%; animation-delay: 3s; }
@@ -517,9 +517,39 @@ body {
   font-size: 0.8rem;
 }
 
+.success-message {
+  background-color: rgba(0, 255, 0, 0.1);
+  color: #48c78e;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.user-profile-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 15px;
+}
+
+.navbar-user-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #ff00cc;
+  object-fit: cover;
+}
+
+.navbar-username {
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
 /* ================================
    GitHub-style settings popup
-================================== */
 .settings-overlay {
   position: fixed;
   inset: 0;
@@ -630,7 +660,6 @@ body.light-mode .theme-pill.selected {
 /* ================================
    Light theme overrides
    (body.light-mode is added by App.jsx)
-================================== */
 
 body.light-mode {
   background: linear-gradient(135deg, #e0f2ff, #f5f7fb);

@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./Auth.css";
 
 function Register() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -15,14 +16,30 @@ function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      return setError("Passwords do not match");
+  const uname = username.trim();
+  if (!uname) {
+  return setError("Username cannot be empty");
+  }
+
+  if (uname.length < 3 || uname.length > 20) {
+  return setError("Username must be between 3 and 20 characters");
+  }
+
+  for (let i = 0; i < uname.length; i++) {
+    const char = uname[i];
+    const isLetter = (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z');
+    const isNumber = char >= '0' && char <= '9';
+    const isUnderscore = char === '_';
+
+    if (!isLetter && !isNumber && !isUnderscore) {
+    return setError("Username can only contain letters, numbers, or underscores");
+      }
     }
 
     try {
       setError("");
       setLoading(true);
-      await signup(email, password);
+      await signup(email, password, uname);
       navigate("/");
     } catch (error) {
       setError("Failed to create an account: " + error.message);
@@ -37,6 +54,17 @@ function Register() {
         <h2>Register for StudyAir</h2>
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="e.g. study_fan123"
+              required
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
