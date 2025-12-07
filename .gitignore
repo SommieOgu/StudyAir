@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+study-air-backend/.env
+
+study-air-backend/.env1

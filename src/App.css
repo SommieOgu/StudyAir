@@ -88,6 +88,27 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+/* Icon-only settings button */
+.user-settings-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.08s ease;
+}
+
 .login-btn {
   background-color: #f0f0f0;
   color: black;
@@ -106,6 +127,21 @@ body {
   background: linear-gradient(to right, #e000aa, #2222cc);
 }
 
+.user-settings-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.user-settings-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.user-settings-btn svg {
+  font-size: 16px;
+}
 
 .hero {
   position: relative;
@@ -479,4 +515,308 @@ body {
 .footer-section p {
   margin: 4px 0; 
   font-size: 0.8rem;
+}
+
+/* ================================
+   GitHub-style settings popup
+================================== */
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.settings-popup {
+  width: 380px;
+  max-width: 90%;
+  background: #161b22;              /* GitHub dark card */
+  border-radius: 12px;
+  border: 1px solid #30363d;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+  padding: 16px 20px 18px;
+  color: #e6edf3;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+/* Light version of the popup */
+body.light-mode .settings-popup {
+  background: #f9fafb;
+  border-color: #d0d7de;
+  color: #111827;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.settings-header h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.icon-btn {
+  border: none;
+  background: transparent;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.settings-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.settings-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #9ca3af;
+  margin: 0 0 8px;
+}
+
+.theme-options {
+  display: flex;
+  gap: 8px;
+}
+
+.theme-pill {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid #30363d;
+  background: #0d1117;
+  color: #e6edf3;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+}
+
+.theme-pill.selected {
+  border-color: #1f6feb;
+  background: #1f2937;
+}
+
+/* Light mode colors for the pills */
+body.light-mode .theme-pill {
+  background: #e0edff;
+  border-color: #cbd5f5;
+  color: #1f2937;
+}
+
+body.light-mode .theme-pill.selected {
+  background: #ffffff;
+  border-color: #3366ff;
+}
+
+/* ================================
+   Light theme overrides
+   (body.light-mode is added by App.jsx)
+================================== */
+
+body.light-mode {
+  background: linear-gradient(135deg, #e0f2ff, #f5f7fb);
+  color: #0f172a;
+}
+
+/* main app container */
+body.light-mode .app {
+  background: transparent;
+  color: #0f172a;
+}
+
+/* Header + footer */
+body.light-mode .top-header {
+  background: #f6feff;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+/* Light mode: hero heading + subtitle more readable on blue bg */
+body.light-mode .hero h2 {
+  color: #fffcfcfc;           /* dark navy */
+  -webkit-text-stroke: 1px rgb(30, 14, 117);
+}
+
+body.light-mode .hero p {
+ color: rgb(30, 14, 117);          /* dark navy */
+  -webkit-text-stroke: 0.2px rgb(30, 14, 117);
+}
+
+
+body.light-mode .footer {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+/* Nav links */
+body.light-mode .nav-buttons a {
+  color: #1f2937;
+}
+
+body.light-mode .nav-buttons a:hover {
+  color: #2563eb;
+}
+
+/* Auth buttons */
+body.light-mode .login-btn {
+  background-color: #e5edff;
+  color: #1f2937;
+}
+
+body.light-mode .login-btn:hover {
+  background-color: #d4e2ff;
+}
+
+body.light-mode .register-btn {
+  background: linear-gradient(to right, #3b82f6, #6366f1);
+}
+
+/* Cards & panels */
+body.light-mode .feature-card,
+body.light-mode .agent-card,
+body.light-mode .testimonial-card,
+body.light-mode .testimonial-card,
+body.light-mode .description,
+body.light-mode .mission {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 8px 20px rgba(148, 163, 184, 0.25);
+  border-color: #dbeafe;
+}
+
+/* Light mode: stronger hover feedback */
+body.light-mode .feature-card:hover,
+body.light-mode .agent-card:hover,
+body.light-mode .testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(148, 163, 184, 0.35);
+  border-color: #60a5fa;       /* brighter blue edge */
+}
+
+/* Light mode: make settings button subtle but visible */
+body.light-mode .user-settings-btn {
+  background: #e5e7eb;              /* light gray pill */
+  border-color: #d1d5db;
+  color: #4b5563;                   /* medium gray icon */
+}
+
+/* Light mode: hover state */
+body.light-mode .user-settings-btn:hover {
+  background: #d1d5db;
+  border-color: #9ca3af;
+  box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.5);
+}
+
+
+/* Hero floating messages */
+body.light-mode .message {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.35);
+  color: #0f172a;
+}
+
+/* CTA button */
+body.light-mode .cta-button {
+  background: linear-gradient(to right, #2563eb, #6366f1);
+  box-shadow: 0 0 14px rgba(37, 99, 235, 0.35);
+}
+
+/* === Light mode: testimonials section === */
+
+body.light-mode .testimonials {
+  background: #e5edff; /* soft pastel indigo */
+  border-radius: 1rem;
+  box-shadow: 0 10px 28px rgba(148, 163, 184, 0.25);
+  color: #0f172a;
+}
+
+body.light-mode .testimonials h3 {
+  color: #0f172a; /* dark navy title */
+}
+
+body.light-mode .testimonials h3::after {
+  background: linear-gradient(to right, #2563eb, #6366f1);
+}
+
+body.light-mode .testimonial-card {
+  background: #ffffff;
+  border: 1px solid #dbeafe;           /* light indigo border */
+  box-shadow: 0 8px 20px rgba(148, 163, 184, 0.25);
+  color: #111827;
+}
+
+body.light-mode .testimonial-card:hover {
+  box-shadow: 0 10px 26px rgba(148, 163, 184, 0.35);
+  transform: translateY(-4px);
+}
+
+body.light-mode .testimonial-card p {
+  color: #4b5563;  /* darker text for readability */
+}
+
+body.light-mode .testimonial-card h4 {
+  color: #1f2937;  /* dark name text */
+}
+
+/* === Light mode: agent dropdown button + arrow === */
+
+body.light-mode .agent-dropdown-btn {
+  background-color: #e5edff;           /* soft pastel blue */
+  color: #1f2937;                      /* dark navy text */
+  box-shadow: 0 2px 8px rgba(148, 163, 184, 0.35);
+  border: 1px solid #c7d2fe;
+}
+
+body.light-mode .agent-dropdown-btn:hover {
+  background-color: #d4e2ff;
+  box-shadow: 0 3px 10px rgba(148, 163, 184, 0.45);
+}
+
+body.light-mode .agent-dropdown-btn .arrow {
+  border-top-color: #2563eb;           /* blue arrow instead of pink */
+}
+
+
+
+body.light-mode .agent-dropdown-menu {
+  background: rgb(239, 239, 239);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+  margin-top: 6px;
+  border-radius: 4px;
+  width: 150px;
+  list-style: none;
+  padding: 0;
+  z-index: 1000;
+}
+
+body.light-mode .agent-dropdown-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  color: rgb(19, 19, 19);
+  transition: background-color 0.2s ease;
+}
+
+body.light-mode .agent-dropdown-item:hover {
+  background-color: #87d0f1;
 }

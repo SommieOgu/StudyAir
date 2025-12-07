@@ -110,3 +110,49 @@ p {
   margin-top: 0.5rem;
   font-size: 0.9rem;
 }
+
+/* ==================================
+   Light Theme Overrides for ExamPrep
+   ================================== */
+body.light-mode .exam-prep-container {
+  background: #ffffff;
+  color: #1f2937;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); /* blue glow */
+}
+
+body.light-mode .exam-prep-container h2 {
+  color: #1f2937;
+}
+
+body.light-mode .manual-flashcard h3,
+body.light-mode .flashcard-upload label {
+  color: #1f2937;
+}
+
+body.light-mode .manual-flashcard input {
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #1f2937;
+}
+
+body.light-mode .manual-flashcard button,
+body.light-mode .deck-controls button {
+  /* Blue/Indigo gradient for light mode */
+  background: linear-gradient(to right, #2563eb, #6366f1);
+  color: white;
+}
+
+body.light-mode .flashcard {
+  background: #f9fafb;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+  border: 1px solid #e0e7ff;
+  color: #1f2937;
+}
+
+body.light-mode .flashcard:hover {
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+}
+
+body.light-mode p {
+  color: #4b5563;
+}
