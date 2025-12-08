@@ -100,6 +100,106 @@ Below are the key backend dependencies and their purposes.
 
 ---
 
+🚀 Backend Deployment (Render)
+
+Follow these steps to deploy the StudyAir backend using Render Web Services.
+
+Step 1: Create a New Web Service
+
+Go to Render → New → Web Service
+
+Connect your GitHub repository containing the backend code.
+
+Choose the following options:
+
+Environment: Node
+
+Build Command:
+
+npm install
+
+
+Start Command:
+
+node server.js
+
+
+Render will automatically detect your package.json.
+
+Step 2: Add Environment Variables
+
+Go to:
+
+Render → Your Service → Environment → Add Environment Variable
+
+Add:
+
+PORT=3000
+GROQ_API_KEY=your_api_key_here
+FIREBASE_PROJECT_ID=your_firebase_project
+FIREBASE_CLIENT_EMAIL=your_service_account_email
+FIREBASE_PRIVATE_KEY="your_private_key_here"
+
+
+If you use serviceAccountKey.json, upload it in Render’s Disk section.
+
+Step 3: Deploy
+
+Push to GitHub → Render auto-deploys.
+
+Your backend will be available at:
+
+https://your-service-name.onrender.com
+
+⚙️ Installation & Local Setup
+1. Clone the Repository
+git clone https://github.com/yourusername/studyair-backend.git
+cd studyair-backend
+
+2. Install Backend Dependencies
+npm install
+
+3. Configure Firebase
+
+Create your Firebase service account and ensure your backend initialization file references:
+
+projectId
+
+clientEmail
+
+privateKey
+
+Or place your serviceAccountKey.json in the root folder.
+
+4. Install Firebase SDK (Frontend Only)
+
+If your frontend uses Firebase:
+
+npm install firebase
+
+5. Install Concurrently (Optional)
+
+This allows you to run frontend + backend together:
+
+npm install concurrently vite --save-dev
+
+
+Then in your package.json:
+
+"scripts": {
+  "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+}
+
+6. Start the Development Server
+npm run dev
+
+Go to:
+Render → Your Service → Environment → Add Environment Variable
+Add the following:
+
+```bash
+npm install
+
 # ⚙️ Installation & Setup
 
 ### **1. Clone the repository**
