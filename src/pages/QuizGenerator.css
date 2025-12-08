@@ -208,3 +208,98 @@
   font-size: 1.125rem;
   font-weight: 600;
 }
+
+/* =====================================
+   Light Theme Overrides for QuizGenerator
+   ===================================== */
+
+body.light-mode .quiz-box,
+body.light-mode .quiz-result {
+  background: #ffffff; /* light card background */
+  color: #1f2937; /* dark text */
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); /* blue glow */
+}
+
+body.light-mode .quiz-box h2,
+body.light-mode .quiz-result h2 {
+  color: #2563eb; /* blue accent color */
+  text-shadow: none;
+}
+
+body.light-mode .quiz-box label {
+  color: #1f2937;
+}
+
+body.light-mode .quiz-box input,
+body.light-mode .quiz-box select {
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #1f2937;
+}
+
+body.light-mode .quiz-box button,
+body.light-mode .submit-button {
+  /* Blue/Indigo gradient for light mode */
+  background: linear-gradient(to right, #2563eb, #6366f1);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Quiz Result Section */
+body.light-mode .question-block {
+  background: #f9fafb;
+  border: 2px solid #e0e7ff; /* light blue border */
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.1);
+}
+
+body.light-mode .question-block h3 {
+  color: #1f2937;
+}
+
+body.light-mode .option-button {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  color: #4b5563;
+}
+
+body.light-mode .option-button:hover:not(:disabled) {
+  border-color: #2563eb;
+  background: #f3f8ff;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+}
+
+body.light-mode .option-button.selected {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
+  border-color: #2563eb;
+  color: #1f2937;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Light Mode Correct/Incorrect */
+body.light-mode .option-button.correct {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(16, 185, 129, 0.1));
+  border-color: #10b981;
+  color: #065f46;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+body.light-mode .option-button.incorrect {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+  border-color: #ef4444;
+  color: #991b1b;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+body.light-mode .score-display {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
+  border: 2px solid #2563eb;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+}
+
+body.light-mode .score-display h3 {
+  color: #2563eb;
+  text-shadow: none;
+}
+
+body.light-mode .score-display p {
+  color: #1f2937;
+}

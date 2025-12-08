@@ -1,10 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
-import './App.css';
+import { FaCog, FaTimes } from "react-icons/fa";
+import "./App.css";
+
 import NoteTaker from "./pages/NoteTaker";
 import QuizGenerator from "./pages/QuizGenerator";
-import ExamPrep from "./pages/ExamPrep";
 import StudyRoom from "./pages/StudyRoom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Settings from "./pages/Settings";
+import { useAuth } from "./contexts/AuthContext";
+
+/* ================= SETTINGS POPUP ================= */
+
+const SettingsPopup = ({ theme, onThemeChange, onClose }) => {
+  return (
+    <div className="settings-overlay" onClick={onClose}>
+      <div className="settings-popup" onClick={(e) => e.stopPropagation()}>
+        <div className="settings-header">
+          <h3>Appearance</h3>
+          <button className="icon-btn" onClick={onClose}>
+            <FaTimes />
+          </button>
+        </div>
+
+        <div className="settings-section">
+          <p className="settings-section-title">Theme</p>
+          <div className="theme-options">
+            <button
+              className={`theme-pill ${theme === "light" ? "selected" : ""}`}
+              onClick={() => onThemeChange("light")}
+            >
+              Light
+            </button>
+            <button
+              className={`theme-pill ${theme === "dark" ? "selected" : ""}`}
+              onClick={() => onThemeChange("dark")}
+            >
+              Dark
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ================= AGENT DROPDOWN ================= */
 
 function AgentDropdown() {
   const [open, setOpen] = useState(false);
@@ -13,7 +55,6 @@ function AgentDropdown() {
   const agents = [
     { name: "Note Taker", path: "/note-taker" },
     { name: "Quiz Generator", path: "/quiz-generator" },
-    { name: "Exam Prep", path: "/exam-prep" },
     { name: "Study Room", path: "/study-room" },
   ];
 
@@ -25,8 +66,7 @@ function AgentDropdown() {
   return (
     <div className="agent-dropdown">
       <button className="agent-dropdown-btn" onClick={() => setOpen(!open)}>
-        AI Agents
-        <span className="arrow" />
+        AI Agents <span className="arrow" />
       </button>
       {open && (
         <ul className="agent-dropdown-menu">
@@ -45,48 +85,138 @@ function AgentDropdown() {
   );
 }
 
+/* ================= MAIN APP ================= */
+
 function App() {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
+  /* ===== APPLY THEME ===== */
+  useEffect(() => {
+    document.body.classList.toggle("light-mode", theme === "light");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  /* ===== SCROLL FUNCTION FOR HOME + ABOUT ===== */
   const scrollToSection = (id) => {
     if (location.pathname !== "/") {
-      navigate("/", { replace: false });
+      navigate("/");
       setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) element.scrollIntoView({ behavior: "smooth" });
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
       }, 50);
     } else {
-      const element = document.getElementById(id);
-      if (element) element.scrollIntoView({ behavior: "smooth" });
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  /* ===== LOGOUT ===== */
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch {
+      alert("Failed to log out");
     }
   };
 
   return (
     <div className="app">
+      {/* ================= HEADER ================= */}
       <header className="top-header">
         <h1 className="logo">StudyAir</h1>
+
         <nav className="nav-buttons">
           <Link
             to="/"
-            onClick={(e) => { e.preventDefault(); scrollToSection("home-hero"); }}
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("home-hero");
+            }}
           >
             Home
           </Link>
+
           <Link
             to="/"
-            onClick={(e) => { e.preventDefault(); scrollToSection("our-purpose"); }}
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("our-purpose");
+            }}
           >
             About
           </Link>
+
           <AgentDropdown />
         </nav>
+
         <div className="auth-buttons">
-          <button className="login-btn">Login</button>
-          <button className="register-btn">Register</button>
+          {currentUser ? (
+            <>
+              <div className="user-profile-nav">
+                <img
+                  src={
+                    currentUser.photoURL ||
+                    "https://ui-avatars.com/api/?name=" +
+                      (currentUser.displayName || currentUser.email)
+                  }
+                  alt="User Icon"
+                  className="navbar-user-icon"
+                />
+                <span className="navbar-username">
+                  {currentUser.displayName || currentUser.email}
+                </span>
+              </div>
+
+              <button
+                className="login-btn"
+                onClick={() => navigate("/settings")}
+                style={{
+                  background: "linear-gradient(to right, #3333ff, #ff00cc)",
+                }}
+              >
+                Account
+              </button>
+
+              <button
+                className="login-btn"
+                onClick={handleLogout}
+                style={{ marginLeft: "8px" }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="login-btn" onClick={() => navigate("/login")}>
+                Login
+              </button>
+              <button
+                className="register-btn"
+                onClick={() => navigate("/register")}
+              >
+                Register
+              </button>
+            </>
+          )}
+
+          <button
+            className="user-settings-btn"
+            onClick={() => setIsSettingsOpen(true)}
+            aria-label="Appearance settings"
+            title="Appearance settings"
+          >
+            <FaCog />
+          </button>
         </div>
       </header>
 
+      {/* ================= ROUTES ================= */}
       <main className="main-content">
         <Routes>
           <Route
@@ -136,7 +266,10 @@ function App() {
                       <p>Study with peers to enhance retention.</p>
                     </div>
                   </div>
-                  <a href="#agents" className="cta-button">Choose Your Agent</a>
+
+                  <a href="#agents" className="cta-button">
+                    Choose Your Agent
+                  </a>
                 </div>
 
                 <div id="agents" className="agent-grid">
@@ -147,10 +280,6 @@ function App() {
                   <Link className="agent-card quiz-generator" to="/quiz-generator">
                     <h3>📃 Quiz Generator</h3>
                     <p>Generate quizzes from your study material.</p>
-                  </Link>
-                  <Link className="agent-card exam-prep" to="/exam-prep">
-                    <h3>📚 Exam Prep</h3>
-                    <p>Personalized study plans and flashcards.</p>
                   </Link>
                   <Link className="agent-card study-room" to="/study-room">
                     <h3>🗣️ Study Room</h3>
@@ -178,13 +307,17 @@ function App() {
               </section>
             }
           />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/note-taker" element={<NoteTaker />} />
           <Route path="/quiz-generator" element={<QuizGenerator />} />
-          <Route path="/exam-prep" element={<ExamPrep />} />
           <Route path="/study-room" element={<StudyRoom />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </main>
 
+      {/* ================= FOOTER ================= */}
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-section">
@@ -202,6 +335,15 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* ================= SETTINGS POPUP ================= */}
+      {isSettingsOpen && (
+        <SettingsPopup
+          theme={theme}
+          onThemeChange={setTheme}
+          onClose={() => setIsSettingsOpen(false)}
+        />
+      )}
     </div>
   );
 }

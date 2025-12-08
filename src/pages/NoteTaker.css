@@ -109,3 +109,49 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* ... [Dark NoteTaker.css styles] ... */
+
+/* ==================================
+   Light Theme Overrides for NoteTaker
+   ================================== */
+body.light-mode .note-taker-page {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); /* blue glow */
+}
+
+body.light-mode .note-taker-page h2 {
+  color: #1f2937;
+}
+
+body.light-mode .file-upload label,
+body.light-mode .record-controls label {
+  color: #1f2937;
+}
+
+body.light-mode .record-controls button,
+body.light-mode .transcribe-btn {
+  /* Blue/Indigo gradient for light mode */
+  background: linear-gradient(to right, #2563eb, #6366f1);
+  color: white;
+}
+
+body.light-mode .transcribe-result {
+  color: #1f2937;
+}
+
+body.light-mode .file-upload input[type="file"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  color: rgb(60, 59, 59);
+  box-sizing: border-box;
+  border-width: 0.5px;
+  border-style: solid ;
+  border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+}
+
+body.light-mode .choose {
+  background-color: rgb(78, 151, 253);
+
+}

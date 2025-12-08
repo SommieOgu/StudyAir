@@ -1,0 +1,157 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.auth-card {
+  background: #1c1c1c;
+  padding: 40px;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.3);
+  width: 100%;
+  max-width: 400px;
+  border: 2px solid rgba(255, 0, 204, 0.1);
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #ff6b6b;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(255, 0, 204, 0.3);
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background: #2a2a2a;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ff00cc;
+  box-shadow: 0 0 10px rgba(255, 0, 204, 0.3);
+}
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
+}
+
+.auth-submit-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.6);
+}
+
+.auth-submit-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #ccc;
+}
+
+.auth-footer a {
+  color: #ff00cc;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+  color: #ff4081;
+  text-decoration: underline;
+}
+
+/* =====================================
+   Light Theme Overrides for AUTH
+   ===================================== */
+
+
+body.light-mode .auth-card {
+  background: #ffffffdf;
+  color: #0f172a;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); /* blue glow */
+}
+body.light-mode .auth-card h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #222222;
+}
+body.light-mode .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: #eeeeee;
+    color: rgb(10, 10, 10);
+    transition: all 0.3s 
+ease;
+}
+body.light-mode .form-group input:focus {
+  outline: none;
+  border-color: #a3e0ff;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);;
+}
+
+body.light-mode .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #141414;
+}
+body.light-mode .auth-footer a {
+  color: #2259ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+body.light-mode .auth-footer a:hover {
+  color: #ff4081;
+  text-decoration: underline;
+}

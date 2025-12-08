@@ -16,6 +16,60 @@ Note: This will impact Vite dev & build performances.
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
 # StudyAir
-Study website with AI integration for the future of studing
+
+StudyAir is a React.js web app featuring AI-powered study tools including Note Taker, Quiz Generator, and Study Room.  
+
+## Features
+Frontend:
+
+- Home page with hero section and floating messages
+- Navigation bar with Home, About, AI Agents dropdown, Account Management, and Setting Display Themes
+- Individual pages for each AI Agent
+- Responsive design with hover animations
+- Interactive settings page allowing user to easily change thier account details
+
+Backend:
+
+- User Authentication: Secure Sign up, Login, and password reset functionality using firebase
+- Ensures username uniqueness by linking firebase usernames and users collections
+- Provides real time user tracking using Firebase's AuthStateChanged.
+- The backend incorporates Firebase Authentication (manages accounts), Cloud Firestore (NoSQL databse used to store user profiles and details), and Firebase Storage (used for retriving user profile icons, as of right now it's tied to a simple API that generates initials from names: https://ui-avatars.com/) for its full integraition. 
+
+## Dependencies
+
+These packages are required for the frontend:
+
+- **react** – Core library for building UI  
+- **react-dom** – Rendering React components in the DOM  
+- **react-router-dom** – Routing between pages/components
+
+These packages are required for the Backend:
+
+- **firebase** – Integration for Auth, Firestore, and Storage  
+- **concurrently** – Runs the client and server development processes simultaneously  
+- **vite** – Build tool and development server
+
+You can install them with:
+
+```bash
+npm install
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/studyair.git
+
+2. In the terminal "cd studyair"
+3. Configure Firebase, make sure your firebase.js is configured with your specific APIKey and projectID
+3. To download firebase, you can run this command to install the latest SDK: 
+    npm install firebase
+4. To download concurrently, you can run this command to install it, this allows you to run your frontend and backend server at the same time with one command:
+    npm install concurrently vite --save-dev
+6. In the terminal, Start development server with "npm run dev"
+
+
+Study website with AI integration for the future of studying
 Contributors: Sommie, Greg, Macy, Glorie, Ivory
