@@ -20,29 +20,27 @@ console.log("Has OPENAI_API_KEY at startup:", !!process.env.OPENAI_API_KEY);
 app.use(express.json());
 // CORS – allow your Vite dev servers
 // 6) CORS – allow your Vite dev servers
+const allowedOrigins = [
+  "https://studyair-e4d78.web.app", // Firebase frontend
+  "http://localhost:5173",          // Vite dev
+  "http://localhost:5174",          // optional
+];
+
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow non-browser clients (curl, Postman, etc.)
+      // Allow non-browser tools (no Origin header)
       if (!origin) return callback(null, true);
 
-      const allowedOrigins = [
-        "https://studyair-e4d78.web.app", // your deployed frontend
-        "http://localhost:5173",          // Vite dev
-        "http://localhost:5174",          // (optional) other dev ports
-      ];
-
-      if (
-        allowedOrigins.includes(origin) ||
-        origin.startsWith("http://localhost:")
-      ) {
+      if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
+      // Just reject CORS silently (no error thrown)
       console.log("❌ CORS blocked origin:", origin);
-      return callback(new Error("Not allowed by CORS")); // <-- this is what you're seeing
+      return callback(null, false);
     },
-    credentials: false,
+    methods: ["GET", "POST", "OPTIONS"],
   })
 );
 
