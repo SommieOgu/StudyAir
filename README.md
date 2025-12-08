@@ -51,6 +51,63 @@ These packages are required for the Backend:
 - **concurrently** – Runs the client and server development processes simultaneously  
 - **vite** – Build tool and development server
 
+# 📦 Dependencies
+
+Below are the key backend dependencies and their purposes.
+
+---
+
+## **Core Framework**
+
+| Package | Purpose |
+|--------|---------|
+| **express** | Web framework used to create REST API endpoints. |
+| **cors** | Enables the frontend (local or deployed) to access the backend. |
+
+---
+
+## **AI & Transcription**
+
+| Package | Purpose |
+|--------|---------|
+| **groq-sdk** | Connects to Groq’s AI API for generating quizzes or transcription. If using OpenAI Whisper instead of Groq, replace with the appropriate SDK. |
+
+---
+
+## **Firebase / Database**
+
+| Package | Purpose |
+|--------|---------|
+| **firebase-admin** | Secure server-side access to Firestore & Storage. Used to save notes, quiz results, and more. |
+
+---
+
+## **Uploads / File Handling**
+
+| Package | Purpose |
+|--------|---------|
+| **multer** | Handles file uploads (e.g., audio files) from the frontend. |
+| **fs** | Node’s built-in file system module used to read/write uploaded files. |
+| **path** | Built-in module for safely manipulating file paths. |
+
+---
+
+## **Environment & Server Tools**
+
+| Package | Purpose |
+|--------|---------|
+| **dotenv** | Loads API keys and secrets from `.env` without exposing them in code. |
+
+---
+
+# ⚙️ Installation & Setup
+
+### **1. Clone the repository**
+
+```bash
+git clone https://github.com/yourusername/studyair-backend.git
+cd studyair-backend
+
 You can install them with:
 
 ```bash
