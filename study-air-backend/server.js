@@ -13,6 +13,10 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+console.log(">>> StudyAir backend starting up...");
+console.log("Has OPENAI_API_KEY at startup:", !!process.env.OPENAI_API_KEY);
+
+
 app.use(express.json());
 // CORS – allow your Vite dev servers
 // 6) CORS – allow your Vite dev servers
