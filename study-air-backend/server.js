@@ -40,9 +40,9 @@ app.use(
       }
 
       console.log("❌ CORS blocked origin:", origin);
-      return callback(new Error("Not allowed by CORS"));
+      return callback(new Error("Not allowed by CORS")); // <-- this is what you're seeing
     },
-    credentials: false, // you’re not using cookies, so this can be false
+    credentials: false,
   })
 );
 
