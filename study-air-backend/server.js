@@ -42,6 +42,13 @@ app.use(
   })
 );
 
+app.get("/api/check-env", (req, res) => {
+  res.json({
+    hasOpenAIKey: !!process.env.OPENAI_API_KEY,
+    // DON'T send the real key back!
+  });
+});
+
 
 // ----------------------
 // Firebase initialization
