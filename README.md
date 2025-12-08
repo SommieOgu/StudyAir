@@ -37,7 +37,7 @@ Backend:
 - Provides real time user tracking using Firebase's AuthStateChanged.
 - The backend incorporates Firebase Authentication (manages accounts), Cloud Firestore (NoSQL databse used to store user profiles and details), and Firebase Storage (used for retriving user profile icons, as of right now it's tied to a simple API that generates initials from names: https://ui-avatars.com/) for its full integraition. 
 
-## Dependencies
+# 📦 Dependencies
 
 These packages are required for the frontend:
 
@@ -51,7 +51,7 @@ These packages are required for the Backend:
 - **concurrently** – Runs the client and server development processes simultaneously  
 - **vite** – Build tool and development server
 
-# 📦 Dependencies
+
 
 Below are the key backend dependencies and their purposes.
 
@@ -116,12 +116,13 @@ Environment: Node
 
 Build Command:
 
-npm install
+`npm install`
+
 
 
 Start Command:
+`node server.js`
 
-node server.js
 
 
 Render will automatically detect your package.json.
@@ -133,14 +134,13 @@ Go to:
 Render → Your Service → Environment → Add Environment Variable
 
 Add:
-
+```
 PORT=3000
 GROQ_API_KEY=your_api_key_here
 FIREBASE_PROJECT_ID=your_firebase_project
 FIREBASE_CLIENT_EMAIL=your_service_account_email
 FIREBASE_PRIVATE_KEY="your_private_key_here"
-
-
+```
 If you use serviceAccountKey.json, upload it in Render’s Disk section.
 
 Step 3: Deploy
@@ -149,15 +149,15 @@ Push to GitHub → Render auto-deploys.
 
 Your backend will be available at:
 
-https://your-service-name.onrender.com
+`https://your-service-name.onrender.com`
 
 ⚙️ Installation & Local Setup
 1. Clone the Repository
-git clone https://github.com/yourusername/studyair-backend.git
-cd studyair-backend
+`git clone https://github.com/yourusername/studyair-backend.git`
+`cd studyair-backend`
 
 2. Install Backend Dependencies
-npm install
+`npm install`
 
 3. Configure Firebase
 
@@ -175,23 +175,23 @@ Or place your serviceAccountKey.json in the root folder.
 
 If your frontend uses Firebase:
 
-npm install firebase
+`npm install firebase`
 
 5. Install Concurrently (Optional)
 
 This allows you to run frontend + backend together:
 
-npm install concurrently vite --save-dev
+`npm install concurrently vite --save-dev`
 
 
 Then in your package.json:
-
+```
 "scripts": {
   "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
 }
-
+```
 6. Start the Development Server
-npm run dev
+`npm run dev`
 
 Go to:
 Render → Your Service → Environment → Add Environment Variable
