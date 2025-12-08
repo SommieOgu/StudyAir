@@ -3,9 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { OpenAI }= require('openai');
-const { toFile } = require('openai/uploads');
-
+const OpenAI = require("openai");
+const { toFile } = require("openai/uploads");
 
 // In-memory storage so we get the file as a Buffer
 const upload = multer({
