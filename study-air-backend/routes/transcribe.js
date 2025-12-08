@@ -15,7 +15,7 @@ const upload = multer({
 // Check API key exists at startup
 if (!process.env.OPENAI_API_KEY) {
   console.warn(
-    "⚠️ OPENAI_API_KEY is not set. /api/transcribe will fail until you add it to .env1"
+    " OPENAI_API_KEY is not set. /api/transcribe will fail until you add it to .env1"
   );
 }
 

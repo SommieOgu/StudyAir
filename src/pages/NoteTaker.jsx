@@ -1,7 +1,13 @@
 // src/pages/NoteTaker.jsx
 import React, { useState, useRef } from "react";
 import "./NoteTaker.css";
-import { firestore } from "../firebaseClient";   // 🔹 use your frontend Firebase
+import { firestore } from "../firebaseClient"; // use your frontend Firebase
+
+// 🌐 Backend base URL:
+// - In production: set VITE_API_BASE_URL (e.g. https://studyair-backend.onrender.com)
+// - In local dev: falls back to http://localhost:3000
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
 function NoteTaker() {
   const [file, setFile] = useState(null);
@@ -49,7 +55,9 @@ function NoteTaker() {
 
       mr.onstop = async () => {
         try {
-          const rawBlob = new Blob(audioChunksRef.current, { type: "audio/webm" });
+          const rawBlob = new Blob(audioChunksRef.current, {
+            type: "audio/webm",
+          });
 
           const endTime = performance.now();
           const durationMs = endTime - recordingStartRef.current;
@@ -62,7 +70,7 @@ function NoteTaker() {
             "ms"
           );
 
-          // Simple: use raw blob as File; OpenAI Whisper API can handle it
+          // Use raw blob as File; Whisper can handle it
           const recordedFile = new File([rawBlob], "recording.webm", {
             type: "audio/webm",
           });
@@ -94,7 +102,9 @@ function NoteTaker() {
   const stopRecording = () => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
-      mediaRecorderRef.current.stream.getTracks().forEach((t) => t.stop());
+      mediaRecorderRef.current.stream
+        .getTracks()
+        .forEach((t) => t.stop());
       setRecording(false);
       console.log("[NoteTaker] Recording stopped.");
     }
@@ -119,14 +129,15 @@ function NoteTaker() {
       const formData = new FormData();
       formData.append("audio", file); // Multer expects field name "audio"
 
-      console.log("[NoteTaker] Sending POST to /api/transcribe...");
-      const response = await fetch("http://localhost:3000/api/transcribe", {
+      console.log(
+        `[NoteTaker] Sending POST to ${API_BASE}/api/transcribe...`
+      );
+
+      const response = await fetch(`${API_BASE}/api/transcribe`, {
         method: "POST",
         body: formData,
       });
 
-
-      console.log("[NoteTaker] Sending POST to /api/transcribe...");
       if (!response.ok) {
         const errText = await response.text();
         console.error(
@@ -149,7 +160,7 @@ function NoteTaker() {
       setTranscriptionText(text || "");
       setTranscribed(true);
 
-      // 🔹 Save to Firestore from the FRONTEND (no /api/notes)
+      // Save to Firestore from the FRONTEND
       if (text && text.trim().length > 0) {
         try {
           await firestore.collection("notes").add({
@@ -159,7 +170,10 @@ function NoteTaker() {
           });
           console.log("[NoteTaker] Saved note to Firestore (frontend).");
         } catch (saveErr) {
-          console.error("[NoteTaker] Failed to save to Firestore:", saveErr);
+          console.error(
+            "[NoteTaker] Failed to save to Firestore:",
+            saveErr
+          );
         }
       }
     } catch (err) {
@@ -178,7 +192,12 @@ function NoteTaker() {
 
         {/* File upload */}
         <div className="file-upload">
-          <input name="choose" type="file" accept="audio/*" onChange={handleFileChange} />
+          <input
+            name="choose"
+            type="file"
+            accept="audio/*"
+            onChange={handleFileChange}
+          />
         </div>
 
         {/* Recording controls */}

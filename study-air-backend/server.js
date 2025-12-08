@@ -19,19 +19,29 @@ app.use(express.json());
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow same-origin / curl etc.
+      // allow non-browser clients (curl, Postman, etc.)
       if (!origin) return callback(null, true);
 
-      // Allow any localhost frontend (5173, 5174, 5175, etc.)
-      if (origin.startsWith("http://localhost:")) {
+      const allowedOrigins = [
+        "https://studyair-e4d78.web.app", // your deployed frontend
+        "http://localhost:5173",          // Vite dev
+        "http://localhost:5174",          // (optional) other dev ports
+      ];
+
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.startsWith("http://localhost:")
+      ) {
         return callback(null, true);
       }
 
+      console.log("❌ CORS blocked origin:", origin);
       return callback(new Error("Not allowed by CORS"));
     },
-    credentials: true,
+    credentials: false, // you’re not using cookies, so this can be false
   })
 );
+
 
 // ----------------------
 // Firebase initialization
@@ -80,13 +90,16 @@ const upload = multer({
 // 10) Groq client – OPTION 2 (SAFE):
 //     Only create client if GROQ_API_KEY is set.
 //     Otherwise, /api/generate-quiz will return 503 instead of crashing.
+const groqKey = process.env.GROQ_API_KEY;
+
+// 2) Only create the client if the key exists
 let groq = null;
-if (process.env.GROQ_API_KEY) {
-  groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+if (groqKey) {
+  groq = new Groq({ apiKey: groqKey });
   console.log("Groq client initialized ✅");
 } else {
   console.warn(
-    "⚠️ No GROQ_API_KEY found in .env – /api/generate-quiz will NOT work until you add it."
+    "⚠️ No GROQ_API_KEY found in .env1 – /api/generate-quiz will NOT work until you add it."
   );
 }
 
